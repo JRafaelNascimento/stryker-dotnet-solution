@@ -1,0 +1,8 @@
+{
+  "stryker-multi-projects-config": {
+    "projects-to-test": [
+    ],
+    "test-project-path": "",
+    "stryker-config-file": ""
+  }
+}
