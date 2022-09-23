@@ -14,7 +14,7 @@ Parameters include:
 ## Configuration
 - **stryker-multi-projects-config**
   - **projects-to-test**
-    - Project list to be mutated, should be include only the .csproj filename.
+    - Project list to be mutated, should be included only the .csproj filename.
   - **test-project-path**
     - Root path of unit test project.
   - **stryker-config-file**
