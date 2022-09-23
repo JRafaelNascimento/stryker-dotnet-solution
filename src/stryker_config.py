@@ -3,8 +3,6 @@ import stryker_constants
 
 
 class StrykerConfig:
-    threshold_break = 0
-
     def __init__(self, config_file_path):
         with open(config_file_path) as config_file:
             config_json = json.load(config_file)

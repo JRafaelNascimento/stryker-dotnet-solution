@@ -2,8 +2,6 @@ import argparse
 
 
 class StrykerArgumentHandler:
-    config_file = ''
-
     def __init__(self):
         parser = argparse.ArgumentParser(
             description='Run Stryker Multi Project.')

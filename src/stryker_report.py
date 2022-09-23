@@ -4,11 +4,6 @@ import stryker_constants
 
 
 class StrykerReport:
-    schema_version = ''
-    threshold_high = 0
-    threshold_low = 0
-    file_reports = []
-
     def __init__(self, report_file_name):
         report_json = self.get_json_from_file(report_file_name)
 
@@ -18,6 +13,7 @@ class StrykerReport:
         self.threshold_low = report_json[stryker_constants.STRYKER_REPORT_THRESHOLDS_JSON_KEY][
             stryker_constants.STRYKER_REPORT_THRESHOLDS_LOW_JSON_KEY]
 
+        self.file_reports = []
         for file_name in report_json[stryker_constants.STRYKER_REPORT_FILE_JSON_KEY].keys():
             self.file_reports.append(stryker_file_report.StrykerFileReport(
                 file_name, report_json[stryker_constants.STRYKER_REPORT_FILE_JSON_KEY][file_name]))
@@ -27,23 +23,24 @@ class StrykerReport:
             return json.load(report_file)
 
     def get_mutation_score(self):
-        considered_mutants_count = self.get_considered_mutants_count()
-        if considered_mutants_count == 0:
+        detected_mutants_count = self.get_detected_mutants_count()
+        undetected_mutants_count = self.get_undetected_mutants_count()
+        total_mutants_count = detected_mutants_count + undetected_mutants_count
+        if total_mutants_count == 0:
             return 100.0
 
-        killed_mutants_count = self.get_killed_mutants_count()
-        return (float(killed_mutants_count)/considered_mutants_count) * 100.0
+        return (float(detected_mutants_count)/total_mutants_count) * 100.0
 
-    def get_killed_mutants_count(self):
+    def get_detected_mutants_count(self):
         count = 0
         for file_report in self.file_reports:
-            count += file_report.get_killed_mutants_count()
+            count += file_report.get_detected_mutants_count()
 
         return count
 
-    def get_considered_mutants_count(self):
+    def get_undetected_mutants_count(self):
         count = 0
         for file_report in self.file_reports:
-            count += file_report.get_considered_mutants_count()
+            count += file_report.get_undetected_mutants_count()
 
         return count

@@ -6,8 +6,6 @@ import stryker_report
 
 
 class StrykerReportHandler:
-    stryker_report_folder_path = ''
-
     def __init__(self, stryker_report_folder_path):
         self.stryker_report_folder_path = stryker_report_folder_path
 

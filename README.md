@@ -30,3 +30,7 @@ Parameters include:
 
 **New in 1.0.0**
 - Runs Stryker .NET Mutation tests for all configured projects.
+
+## Related Links
+
+- [Stryker VSS Extension Repository](https://github.com/JRafaelNascimento/stryker-vss-ext)

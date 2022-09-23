@@ -3,10 +3,6 @@ import stryker_constants
 
 
 class StrykerMultiProjectsConfig:
-    projects_to_test = []
-    test_project_path = ''
-    stryker_config_file = ''
-
     def __init__(self, config_file_path):
         with open(config_file_path) as config_file:
             config_json = json.load(config_file)

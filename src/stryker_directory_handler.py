@@ -3,14 +3,6 @@ import os
 
 
 class StrykerDirectoryHandler:
-    work_directory = ''
-    config_multi_project_path = ''
-    config_multi_project_directory = ''
-    test_project_directory = ''
-    stryker_output_directory = ''
-    stryker_config_directory = ''
-    stryker_config_path = ''
-
     def __init__(self, config_file_path, test_project_file_path, stryker_config_file_path):
         self.work_directory = os.getcwd()
         self.config_multi_project_path = os.path.abspath(config_file_path)

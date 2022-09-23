@@ -4,8 +4,6 @@ import stryker_constants
 
 
 class StrykerRunner:
-    stryker_config_file_path = ''
-
     def __init__(self, stryker_config_file_path):
         self.stryker_config_file_path = stryker_config_file_path
 
