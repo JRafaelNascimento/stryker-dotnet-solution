@@ -4,6 +4,7 @@ import stryker_runner
 import stryker_report_handler
 import stryker_directory_handler
 import stryker_argument_handler
+import stryker_constants
 
 
 class StrykerMultiProjectRunner:
@@ -39,6 +40,7 @@ class StrykerMultiProjectRunner:
 
         report = self.stryker_report_handler.get_last_report()
         self.validate_report(report)
+        self.rename_last_html_report_file_name(project_name)
 
         if not self.is_report_successful(project_name, report):
             self.run_failed()
@@ -47,6 +49,12 @@ class StrykerMultiProjectRunner:
         if report == None:
             self.print_error('Failed to load reports')
             self.run_failed()
+
+    def rename_last_html_report_file_name(self, project_name):
+        new_report_file_name = '{}.{}'.format(
+            project_name, stryker_constants.STRYKER_REPORT_HTML_FILE_EXTENSION)
+        self.stryker_report_handler.rename_last_html_report_file_name(
+            new_report_file_name)
 
     def print_error(self, msg):
         print('ERR: {}'.format(msg))
@@ -64,7 +72,7 @@ class StrykerMultiProjectRunner:
     def print_result(self, project_name, mutation_score):
         print('Result:')
         print('\tProject Name: {}'.format(project_name))
-        print('\tMutation Score: {}'.format(str(mutation_score)))
+        print('\tMutation Score: {}%'.format(str(round(mutation_score, 2))))
 
         if not self.is_mutation_score_successful(mutation_score):
             print('\tStatus: Failed')
